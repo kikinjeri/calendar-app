@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Calendar App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>My Calendar App</h1>
+    <div>
+      <button id="modeToggle">Dark Mode</button>
+      <button id="unitToggle">°C/°F</button>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="container">
+    <!-- Calendar -->
+    <section class="calendar-section">
+      <h2>Calendar</h2>
+      <div id="calendar"></div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Weather -->
+    <!-- Weather -->
+<div class="card" id="weather">
+  <h2>Weather - <span id="cityName">Loading...</span></h2>
+  <p id="currentTime"></p>
+  <p id="weather-temp">--°C</p>
+  <p id="weather-desc">--</p>
+  <div id="forecast" class="forecast"></div>
+  <button id="unitToggle">Switch to °F</button>
+</div>
+
+
+      <!-- To-Do -->
+      <div class="card">
+        <h2>To-Do</h2>
+        <input type="text" id="taskInput" placeholder="Add new task">
+        <button id="addTask">Add</button>
+        <ul id="taskList"></ul>
+      </div>
+
+      <!-- Contacts -->
+      <div class="card">
+        <h2>Contacts</h2>
+        <input type="text" id="contactName" placeholder="Name">
+        <input type="text" id="contactPhone" placeholder="Phone">
+        <button id="addContact">Add</button>
+        <ul id="contactList"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
