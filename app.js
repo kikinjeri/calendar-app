@@ -1,73 +1,73 @@
-// ======= Dark/Light Mode =======
-const modeToggle = document.getElementById("modeToggle");
-modeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  modeToggle.textContent = document.body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
-});
+document.addEventListener("DOMContentLoaded", () => {
+  // Dark / Light mode
+  document.getElementById("toggle-mode").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+  });
 
-// ======= Weather =======
-const weatherTemp = document.getElementById("weather-temp");
-const weatherDesc = document.getElementById("weather-desc");
-const cityNameEl = document.getElementById("cityName");
-const forecastEl = document.getElementById("forecast");
-const unitToggle = document.getElementById("unitToggle");
-let tempUnit = "C"; // default
+  // Celsius / Fahrenheit toggle
+  let isCelsius = true;
+  document.getElementById("toggle-unit").addEventListener("click", () => {
+    isCelsius = !isCelsius;
+    updateWeather();
+  });
 
-unitToggle.addEventListener("click", () => {
-  tempUnit = tempUnit === "C" ? "F" : "C";
-  unitToggle.textContent = `Switch to ${tempUnit === "C" ? "°F" : "°C"}`;
-  fetchWeather();
-});
+  // Weather (Ottawa)
+  async function updateWeather() {
+    const date = new Date();
+    document.getElementById("weather-date").textContent = date.toDateString();
 
-// API key
-const apiKey = "YOUR_OPENWEATHERMAP_API_KEY";
+    try {
+      const lat = 45.4215;
+      const lon = -75.6972;
 
-// Detect location
-navigator.geolocation.getCurrentPosition(pos => {
-  const lat = pos.coords.latitude;
-  const lon = pos.coords.longitude;
-  fetchWeather(lat, lon);
-}, () => {
-  alert("Location access denied. Using default city.");
-  fetchWeather();
-});
+      const res = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+      );
+      if (!res.ok) throw new Error("Weather API error");
 
-// Fetch weather
-async function fetchWeather(lat=40.7128, lon=-74.0060) { // Default: NYC
-  // Current Weather
-  const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
-  const data = await res.json();
-  cityNameEl.textContent = data.name;
-  let temp = data.main.temp;
-  if (tempUnit === "F") temp = (temp*9/5)+32;
-  weatherTemp.textContent = `${temp.toFixed(1)}°${tempUnit}`;
-  weatherDesc.textContent = data.weather[0].description;
+      const data = await res.json();
+      const tempC = data.current_weather.temperature;
+      const temp = isCelsius ? tempC : (tempC * 9/5 + 32);
+      const unit = isCelsius ? "°C" : "°F";
 
-  // Forecast (5-day, every 12h step)
-  const resF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
-  const dataF = await resF.json();
-  renderForecast(dataF.list);
-}
+      document.getElementById("weather-temp").textContent = `Temperature: ${temp.toFixed(1)}${unit}`;
+      document.getElementById("weather-desc").textContent =
+        `Windspeed: ${data.current_weather.windspeed} km/h`;
 
-// Render 5-day forecast
-function renderForecast(list) {
-  forecastEl.innerHTML = "";
-  for(let i=0; i<list.length; i+=8){ // every 8th item ~24h
-    let temp = list[i].main.temp;
-    if(tempUnit==="F") temp=(temp*9/5)+32;
-    const card = document.createElement("div");
-    card.className="day-card";
-    const date = new Date(list[i].dt*1000);
-    card.innerHTML = `<strong>${date.toLocaleDateString(undefined,{weekday:'short'})}</strong><br>${temp.toFixed(1)}°${tempUnit}<br>${list[i].weather[0].main}`;
-    forecastEl.appendChild(card);
+      const code = data.current_weather.weathercode;
+      let icon = "sunny.png";
+      if (code >= 1 && code <= 3) icon = "partly_cloudy.png";
+      if (code >= 45 && code <= 99) icon = "rainy.png";
+      document.getElementById("weather-icon").src = icon;
+    } catch (err) {
+      document.getElementById("weather-temp").textContent = "Unable to load weather.";
+      console.error(err);
+    }
   }
-}
+  updateWeather();
 
-// ======= Local Time =======
-const timeEl = document.getElementById("currentTime");
-function updateTime(){
-  const now = new Date();
-  timeEl.textContent = now.toLocaleTimeString();
-}
-setInterval(updateTime,1000);
-updateTime();
+  // To-Do
+  const todoList = document.getElementById("todo-list");
+  document.getElementById("add-todo").addEventListener("click", () => {
+    const input = document.getElementById("todo-input");
+    if (input.value.trim() !== "") {
+      const li = document.createElement("li");
+      li.innerHTML = `<i class="bi bi-square"></i> <span contenteditable="true">${input.value}</span>`;
+      todoList.appendChild(li);
+      input.value = "";
+    }
+  });
+
+  // Contacts
+  const contactList = document.getElementById("contact-list");
+  document.getElementById("add-contact").addEventListener("click", () => {
+    const input = document.getElementById("contact-input");
+    if (input.value.trim() !== "") {
+      const li = document.createElement("li");
+      li.innerHTML = `<img src="avatar.png" alt="Avatar"> <span contenteditable="true">${input.value}</span>`;
+      contactList.appendChild(li);
+      input.value = "";
+    }
+  });
+});
+
