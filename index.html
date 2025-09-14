@@ -11,28 +11,27 @@
   <header class="app-header">
     <div class="header-left">
       <img src="logo.png" alt="Logo" class="logo">
-      <h1>Productivity Dashboard</h1>
+      <h1 id="app-title">Productivity Dashboard</h1>
     </div>
     <div class="controls">
       <button id="toggle-mode" title="Toggle Dark/Light Mode"><i class="bi bi-moon-fill"></i></button>
       <button id="toggle-unit" title="Toggle Celsius/Fahrenheit">°C / °F</button>
+      <button id="toggle-lang">EN / FR</button>
     </div>
   </header>
 
   <main class="grid">
-    <!-- Calendar -->
     <section class="calendar card">
       <header>
-        <button id="prev-month"><i class="bi bi-chevron-left"></i></button>
+        <button id="prev-month" title="Previous Month"><i class="bi bi-chevron-left"></i></button>
         <h2 id="month-year"></h2>
-        <button id="next-month"><i class="bi bi-chevron-right"></i></button>
+        <button id="next-month" title="Next Month"><i class="bi bi-chevron-right"></i></button>
       </header>
       <div id="calendar"></div>
     </section>
 
-    <!-- Weather -->
     <section class="weather card">
-      <h2><i class="bi bi-cloud-sun"></i> Weather</h2>
+      <h2 id="weather-title"><i class="bi bi-cloud-sun"></i> Weather</h2>
       <p id="weather-date"></p>
       <p id="weather-location">Ottawa, Ontario</p>
       <div class="weather-info">
@@ -42,9 +41,8 @@
       <p id="weather-desc"></p>
     </section>
 
-    <!-- To-Do -->
     <section class="todo card">
-      <h2><i class="bi bi-check2-square"></i> To-Do List</h2>
+      <h2 id="todo-title"><i class="bi bi-check2-square"></i> To-Do List</h2>
       <ul id="todo-list"></ul>
       <div class="input-group">
         <input type="text" id="todo-input" placeholder="New task...">
@@ -52,9 +50,8 @@
       </div>
     </section>
 
-    <!-- Contacts -->
     <section class="contacts card">
-      <h2><i class="bi bi-people-fill"></i> Contacts</h2>
+      <h2 id="contacts-title"><i class="bi bi-people-fill"></i> Contacts</h2>
       <ul id="contact-list"></ul>
       <div class="input-group">
         <input type="text" id="contact-input" placeholder="New contact...">
