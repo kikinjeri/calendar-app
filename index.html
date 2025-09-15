@@ -3,64 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productivity Dashboard</title>
+  <title>Productivity Calendar</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
-  <header class="app-header">
-    <div class="header-left">
-      <img src="logo.png" alt="Logo" class="logo">
-      <h1 id="app-title">Productivity Dashboard</h1>
-    </div>
-    <div class="controls">
-      <button id="toggle-mode" title="Toggle Dark/Light Mode"><i class="bi bi-moon-fill"></i></button>
-      <button id="toggle-unit" title="Toggle Celsius/Fahrenheit">°C / °F</button>
-      <button id="toggle-lang">EN / FR</button>
-    </div>
+  <header>
+    <h1 id="calendar-title">Calendar</h1>
+    <select id="language-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="sw">Swahili</option>
+    </select>
   </header>
 
-  <main class="grid">
-    <section class="calendar card">
-      <header>
-        <button id="prev-month" title="Previous Month"><i class="bi bi-chevron-left"></i></button>
-        <h2 id="month-year"></h2>
-        <button id="next-month" title="Next Month"><i class="bi bi-chevron-right"></i></button>
-      </header>
-      <div id="calendar"></div>
+  <main>
+    <section id="calendar-section" class="card">
+      <div class="calendar-nav">
+        <button id="prev-month">&#10094;</button>
+        <div id="month-year"></div>
+        <button id="next-month">&#10095;</button>
+      </div>
+      <div id="calendar-grid"></div>
     </section>
 
-    <section class="weather card">
-      <h2 id="weather-title"><i class="bi bi-cloud-sun"></i> Weather</h2>
-      <p id="weather-date"></p>
-      <p id="weather-location">Ottawa, Ontario</p>
-      <div class="weather-info">
-        <img id="weather-icon" src="sunny.png" alt="Weather" class="weather-img">
-        <p id="weather-temp"></p>
-      </div>
-      <p id="weather-desc"></p>
-    </section>
+    <aside>
+      <section id="weather-section" class="card">
+        <h2 id="weather-title">Weather</h2>
+        <p id="weather-info">Select a date</p>
+      </section>
 
-    <section class="todo card">
-      <h2 id="todo-title"><i class="bi bi-check2-square"></i> To-Do List</h2>
-      <ul id="todo-list"></ul>
-      <div class="input-group">
-        <input type="text" id="todo-input" placeholder="New task...">
-        <button id="add-todo"><i class="bi bi-plus-lg"></i> Add</button>
-      </div>
-    </section>
+      <section id="todo-section" class="card">
+        <h2 id="todo-title">To-Do List</h2>
+        <div class="input-group">
+          <input type="text" id="task-input" placeholder="Enter a task...">
+          <button id="add-task-btn">Add</button>
+        </div>
+        <ul id="todo-list"></ul>
+      </section>
 
-    <section class="contacts card">
-      <h2 id="contacts-title"><i class="bi bi-people-fill"></i> Contacts</h2>
-      <ul id="contact-list"></ul>
-      <div class="input-group">
-        <input type="text" id="contact-input" placeholder="New contact...">
-        <button id="add-contact"><i class="bi bi-plus-lg"></i> Add</button>
-      </div>
-    </section>
+      <section id="contacts-section" class="card">
+        <h2 id="contacts-title">Contacts</h2>
+        <div class="input-group">
+          <input type="text" id="contact-input" placeholder="Enter contact name...">
+          <button id="add-contact-btn">Add</button>
+        </div>
+        <ul id="contacts-list"></ul>
+      </section>
+    </aside>
   </main>
 
-  <script src="calendar.js"></script>
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
