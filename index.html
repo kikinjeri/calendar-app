@@ -3,55 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productivity Calendar</title>
+  <title>Smart Calendar App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1 id="calendar-title">Calendar</h1>
-    <select id="language-select">
+    <h1 id="app-title">📅 Smart Calendar</h1>
+    <select id="language">
       <option value="en">English</option>
       <option value="fr">Français</option>
-      <option value="sw">Swahili</option>
+      <option value="sw">Kiswahili</option>
     </select>
+    <button id="dark-mode-toggle">🌙</button>
   </header>
 
   <main>
-    <section id="calendar-section" class="card">
-      <div class="calendar-nav">
-        <button id="prev-month">&#10094;</button>
-        <div id="month-year"></div>
-        <button id="next-month">&#10095;</button>
-      </div>
-      <div id="calendar-grid"></div>
-    </section>
-
+    <section id="calendar" class="card"></section>
     <aside>
-      <section id="weather-section" class="card">
-        <h2 id="weather-title">Weather</h2>
-        <p id="weather-info">Select a date</p>
-      </section>
-
-      <section id="todo-section" class="card">
-        <h2 id="todo-title">To-Do List</h2>
-        <div class="input-group">
-          <input type="text" id="task-input" placeholder="Enter a task...">
-          <button id="add-task-btn">Add</button>
-        </div>
-        <ul id="todo-list"></ul>
-      </section>
-
-      <section id="contacts-section" class="card">
-        <h2 id="contacts-title">Contacts</h2>
-        <div class="input-group">
-          <input type="text" id="contact-input" placeholder="Enter contact name...">
-          <button id="add-contact-btn">Add</button>
-        </div>
-        <ul id="contacts-list"></ul>
-      </section>
+      <section id="weather" class="card"></section>
+      <section id="tasks" class="card"></section>
+      <section id="contacts" class="card"></section>
     </aside>
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="js/App.js"></script>
 </body>
 </html>
